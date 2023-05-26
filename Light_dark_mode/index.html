@@ -9,9 +9,27 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Dark Mode Switch -->
+    <div class="theme-switch-wrapper">
+      <span id="toggle-icon">
+        <span class="toggle-text">Light Mode</span>
+        <i class="fas fa-sun"></i>
+      </span>
+      <label class="theme-switch">
+        <input type="checkbox" />
+        <div class="slider round"></div>
+      </label>
+    </div>
     <nav id="nav">
       <a href="#home">HOME</a>
       <a href="#about">ABOUT</a>
@@ -72,7 +90,16 @@
         </p>
       </div>
     </section>
-    <section id="contact"></section>
+    <section id="contact">
+      <div class="social-icons">
+        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-codepen"></i>
+        <i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-medium"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-youtube"></i>
+      </div>
+    </section>
     <!-- Script -->
     <script src="script.js"></script>
   </body>
