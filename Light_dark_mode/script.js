@@ -27,7 +27,6 @@ function darkMode() {
   toggleIcon.children[0].textContent = "Dark Mode";
   toggleIcon.children[1].classList.replace("fa-sun", "fa-moon");
   imageMode("dark");
-  //   toggleIcon.children[1].classList.add("fa-moon");
 }
 
 function lightMode() {
@@ -35,7 +34,6 @@ function lightMode() {
   textBox.style.backgroundColor = "rgb(0 0 0 / 50%)";
   toggleIcon.children[0].textContent = "Light Mode";
   toggleIcon.children[1].classList.replace("fa-moon", "fa-sun");
-  //   toggleIcon.children[1].classList.add("fa-sun");
   imageMode("light");
 }
 
