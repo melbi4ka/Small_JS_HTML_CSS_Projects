@@ -62,8 +62,27 @@ body {
   color: #555;
 }
 /**********************/
-/* GENERAL COMPONENTS */
+/* GENERAL REUSABLE COMPONENTS */
 /**********************/
+
+.container {
+  max-width: 120rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  gap: 9.6rem;
+}
+
+.grid--2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
 
 .heading-primary {
   font-size: 5.2rem;
@@ -172,7 +191,6 @@ body {
 /* HERO SECTION */
 /*********************/
 .section-hero {
-  background-color: #fdf2e9;
   padding: 4.8rem 0 9.6rem 0;
 }
 
@@ -227,4 +245,37 @@ body {
 .delivered-text span {
   color: #cf711f;
   font-weight: 700;
+}
+
+/*********************/
+/* HOW IT WORKS */
+/*********************/
+.section-how {
+  padding: 1rem 0;
+  background-color: orangered;
+}
+
+.section-how div div {
+  padding: 10rem;
+  font-size: 5rem;
+  background-color: lavender;
+}
+
+.container {
+  max-width: 120rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  gap: 9.6rem;
+}
+
+.grid--2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3-cols {
+  grid-template-columns: repeat(3, 1fr);
 }
