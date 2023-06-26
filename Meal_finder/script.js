@@ -53,6 +53,50 @@ function searchMeal(event) {
   search.value = '';
 }
 
+//Fetch meal by ID
+async function getMealById(mealID) {
+  let response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`
+  );
+  let data = await response.json();
+  const meal = data.meals[0];
+
+  addMealToDom(meal);
+  // fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`).then();
+}
+
+// Add meal to DOM
+function addMealToDom(meal) {
+  singleMealEl.innerHTML = '';
+  console.log(meal);
+  const ingredients = [];
+
+  for (let i = 1; i <= 20; i++) {
+    if (meal[`strIngredient${i}`]) {
+      ingredients.push(
+        `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`
+      );
+    } else {
+      break;
+    }
+  }
+  // console.log(ingredients);
+  let mealDiv = onCreateElement('div', ['single-meal'], singleMealEl);
+  onCreateElement('h1', '', mealDiv, `${meal.strMeal}`);
+  onCreateElement('img', '', mealDiv, '', {
+    src: meal.strMealThumb,
+    alt: meal.strMeal,
+  });
+  const infoDiv = onCreateElement('div', ['single-meal-info'], mealDiv, ``);
+  onCreateElement('p', '', infoDiv, `${meal.strCategory}`);
+  onCreateElement('div', '', infoDiv, `${meal.strArea}`);
+  const instructionDiv = onCreateElement('div', ['main'], mealDiv);
+  onCreateElement('p', '', instructionDiv, `${meal.strInstructions}`);
+  onCreateElement('h2', '', instructionDiv, 'Ingredients');
+  let ingredientsUl = onCreateElement('ul', '', instructionDiv);
+  ingredients.forEach((el) => onCreateElement('li', '', ingredientsUl, el));
+}
+
 function onCreateElement(type, classNameList, parentEl, textcont, others) {
   let newEl = document.createElement(type);
   if (type === 'input' && textcont !== '') {
@@ -75,3 +119,21 @@ function onCreateElement(type, classNameList, parentEl, textcont, others) {
 }
 
 submit.addEventListener('submit', searchMeal);
+mealsEl.addEventListener('click', (e) => {
+  const path = e.path || (e.composedPath && e.composedPath());
+  const mealInfo = path.find((item) => {
+    // console.log(item);
+    if (item.classList) {
+      return item.classList.contains('meal-info');
+    } else {
+      return false;
+    }
+  });
+
+  // console.log(mealInfo);
+  if (mealInfo) {
+    const mealId = mealInfo.getAttribute('id');
+    // console.log(mealId);
+    getMealById(mealId);
+  }
+});
