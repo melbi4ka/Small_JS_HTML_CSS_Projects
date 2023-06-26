@@ -21,16 +21,13 @@ function searchMeal(event) {
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         resultHeading.innerHTML = `<h2>Search results for ${term}:</h2>`;
         let allMeals = data.meals;
-        // console.log(allMeals);
 
         if (allMeals !== null) {
           mealsEl.innerHTML = allMeals
             .forEach((meal) => {
               const div = onCreateElement('div', ['meal'], mealsEl);
-              console.log(div);
               onCreateElement('img', '', div, '', {
                 src: `${meal.strMealThumb}`,
                 alt: `${meal.strMeal}`,
@@ -45,7 +42,7 @@ function searchMeal(event) {
           resultHeading.innerHTML = `<p>There are no sesrch results.Try again!</p>`;
         }
       })
-      .catch(console.log('Error'));
+      .catch((error) => (allMeals = data.meals));
   } else {
     alert('Please enter a  search term');
   }
@@ -62,13 +59,26 @@ async function getMealById(mealID) {
   const meal = data.meals[0];
 
   addMealToDom(meal);
-  // fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`).then();
+}
+
+//Fetch random meal from API
+
+async function getRandomMeal() {
+  mealsEl.innerHTML = '';
+  resultHeading.innerHTML = '';
+
+  let response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/random.php`
+  );
+  let data = await response.json();
+  const meal = data.meals[0];
+
+  addMealToDom(meal);
 }
 
 // Add meal to DOM
 function addMealToDom(meal) {
   singleMealEl.innerHTML = '';
-  console.log(meal);
   const ingredients = [];
 
   for (let i = 1; i <= 20; i++) {
@@ -80,7 +90,7 @@ function addMealToDom(meal) {
       break;
     }
   }
-  // console.log(ingredients);
+
   let mealDiv = onCreateElement('div', ['single-meal'], singleMealEl);
   onCreateElement('h1', '', mealDiv, `${meal.strMeal}`);
   onCreateElement('img', '', mealDiv, '', {
@@ -119,10 +129,10 @@ function onCreateElement(type, classNameList, parentEl, textcont, others) {
 }
 
 submit.addEventListener('submit', searchMeal);
+random.addEventListener('click', getRandomMeal);
 mealsEl.addEventListener('click', (e) => {
   const path = e.path || (e.composedPath && e.composedPath());
   const mealInfo = path.find((item) => {
-    // console.log(item);
     if (item.classList) {
       return item.classList.contains('meal-info');
     } else {
@@ -130,10 +140,8 @@ mealsEl.addEventListener('click', (e) => {
     }
   });
 
-  // console.log(mealInfo);
   if (mealInfo) {
     const mealId = mealInfo.getAttribute('id');
-    // console.log(mealId);
     getMealById(mealId);
   }
 });
