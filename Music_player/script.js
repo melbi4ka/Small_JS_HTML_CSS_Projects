@@ -1,0 +1,104 @@
+const music = document.querySelector('audio');
+const prevBtn = document.querySelector('#prev');
+const playBtn = document.querySelector('#play');
+const nextBtn = document.querySelector('#next');
+
+const progressContainer = document.querySelector('#progress-container');
+const progress = document.querySelector('#progress');
+
+const image = document.querySelector('img');
+const title = document.querySelector('#title');
+const artist = document.querySelector('#artist');
+
+// Music
+const songs = [
+  {
+    name: 'Cello Suite no. 1 - Prelude in G, BWV 1007',
+    displayName: 'Cello Suite',
+    artist: 'Orchestra',
+  },
+  {
+    name: 'Etude Op. 25 no. 8 in D flat major - Sixths',
+    displayName: 'Etude Op.25 no.8',
+    artist: 'Orchestra',
+  },
+  {
+    name: 'Julia Florida',
+    displayName: 'Julia Florida',
+    artist: 'Jorge de la Cruz',
+  },
+  {
+    name: 'Waltz in A minor, B. 150',
+    displayName: 'Waltz in A minor',
+    artist: 'Orchestra',
+  },
+];
+
+let isPlaying = false;
+
+function playSong() {
+  isPlaying = true;
+  playBtn.classList.replace('fa-play', 'fa-pause');
+  playBtn.title = 'Pause';
+  music.play();
+}
+
+function pauseSong() {
+  isPlaying = false;
+  playBtn.classList.replace('fa-pause', 'fa-play');
+  playBtn.title = 'Play';
+  music.pause();
+}
+
+//Play or Pause Event
+playBtn.addEventListener('click', () => (isPlaying ? pauseSong() : playSong()));
+
+// Update DOM
+function loadSong(song) {
+  title.textContent = song.displayName;
+  artist.textContent = song.artist;
+  music.src = `music/${song.name}.mp3`;
+  image.src = `img/${song.name}.jpg`;
+}
+
+// Current song
+let songIndex = 0;
+
+// Previuos song
+function prevSong() {
+  songIndex--;
+  if (songIndex < 0) {
+    songIndex = songs.length - 1;
+  }
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+// Next song
+function nextSong() {
+  songIndex++;
+  if (songIndex > songs.length - 1) {
+    songIndex = 0;
+  }
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+// On Load - Select First Song
+loadSong(songs[songIndex]);
+
+// Update Progress Bar and Time
+function updateProgressBar(e) {
+  if (isPlaying) {
+    const { duration, currentTime } = e.srcElement;
+    console.log(duration);
+    console.log(currentTime);
+    // Update progress bar width
+    const progressPercent = (currentTime / duration) * 100;
+    progress.style.width = `${progressPercent}%`;
+  }
+}
+
+prevBtn.addEventListener('click', prevSong);
+nextBtn.addEventListener('click', nextSong);
+music.addEventListener('timeupdate', updateProgressBar);

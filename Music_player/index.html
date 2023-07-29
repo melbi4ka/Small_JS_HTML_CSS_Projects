@@ -9,20 +9,49 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-13/css/all.min.css"
+      integrity="sha512-MdXcgiHaL1yFyNjJtThjw0XkwR8tcd1aDcewr+2/whtekkfCbr79HXBNVQB4x+cVZKwnVt1mm3fP1Amj0cGClw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="player-container">
       <!-- Song -->
       <div class="img-container">
-        <img src="img/chello-1.jpg" alt="Album Art" />
+        <img
+          src="img/Cello Suite no. 1 - Prelude in G, BWV 1007.jpg"
+          alt="Album Art"
+        />
       </div>
       <h2 id="title">Classical - Cello Suite</h2>
       <h3 id="artist">Orchestra</h3>
-      <audio
-        src="music/Cello Suite no. 1 - Prelude in G, BWV 1007.mp3"
-        controls
-      ></audio>
+      <audio src="music/Cello Suite no. 1 - Prelude in G, BWV 1007.mp3"></audio>
+      <!-- Progress -->
+      <div class="progress-container" id="progress-container">
+        <div class="progress" id="progress"></div>
+        <div class="duration-wrapper">
+          <span id="current-time">0:00</span>
+          <span id="duration">2:30</span>
+        </div>
+      </div>
+      <!-- Controls -->
+      <div class="player-controls">
+        <i class="fas fa-backward" id="prev" title="Previous"></i>
+        <i class="fas fa-play main-button" id="play" title="Play"></i>
+        <i class="fas fa-forward" id="next" title="Next"></i>
+      </div>
     </div>
     <!-- Script -->
     <script src="script.js"></script>
